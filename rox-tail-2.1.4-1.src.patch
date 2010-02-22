@@ -1,0 +1,22 @@
+--- origsrc/Tail/AppRun	2004-11-21 07:24:39.000000000 -0600
++++ src/Tail/AppRun	2009-10-19 23:37:47.392768800 -0500
+@@ -7,6 +7,8 @@ PROG=Tail
+ APP_DIR=`dirname "$0"`
+ APP_DIR=`cd "$APP_DIR";pwd`; export APP_DIR
+ 
++export PLATFORM="CYGWIN-ix86"
++
+ if [ x"$PLATFORM" = x ]; then
+   ARCH="`uname -m`"
+   case $ARCH in
+--- origsrc/Tail/src/tail.c	2005-10-16 07:01:32.000000000 -0500
++++ src/Tail/src/tail.c	2009-10-19 23:44:04.546290500 -0500
+@@ -19,6 +19,8 @@
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <sys/ioctl.h>
++#include <sys/termios.h>
++#define FIONREAD TIOCINQ
+ #ifdef HAVE_SYS_FILIO_H
+ #include <sys/filio.h>
+ #endif
